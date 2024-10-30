@@ -19,3 +19,9 @@ configured tailwind insider app.
 -NetfilxGPT
  -search Bar
  -Movie Suggestion   
+
+-useRef Hook
+ --Deployed APP to production
+ --Did firebase setup
+ --create authentication 
+
