@@ -1,11 +1,25 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
 import Validate from "../Utils/Validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../Utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { updateProfile } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { addUser } from "../Utils/userSlice";
 
 const Login = () => {
-  const [isSignForm, setisSignForm] = useState(false);
+  const [isSignForm, setisSignForm] = useState(true);
+  const navigate = useNavigate();
+  console.log(isSignForm);
+  const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
+  const dispatch = useDispatch();
+
   const [errorMessage, seterrorMessage] = useState(null);
   const handleClick = () => {
     setisSignForm(!isSignForm);
@@ -14,13 +28,67 @@ const Login = () => {
   const handleSignIn = () => {
     //sent email and password
     const message = Validate(email.current.value, password.current.value);
+
     seterrorMessage(message);
-    if(message) return;
-    if(!isSignForm){
-//sign Up logic
-    }
-    else{
-//sign In Logic
+    if (message) return;
+
+    if (isSignForm) {
+      //sign Up logic
+      console.log(isSignForm);
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: "https://example.com/jane-q-user/profile.jpg",
+          })
+            .then(() => {
+              // Profile updated!
+              // ...
+              const {uid,email,displayName}=auth.currentUser;
+              dispatch(addUser({uid:uid,email:email,displayName:displayName}));
+              navigate("/browse");
+            })
+            .catch((error) => {
+              // An error occurred
+              // ...
+
+              seterrorMessage(error.message);
+            });
+          
+
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          seterrorMessage(errorCode + "-" + errorMessage);
+          // ..
+        });
+    } else {
+      //sign In Logic
+      console.log(isSignForm);
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          navigate("/browse");
+
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          seterrorMessage(errorCode + "-" + errorMessage);
+        });
     }
   };
 
@@ -44,6 +112,7 @@ const Login = () => {
           </h1>
           {isSignForm && (
             <input
+              ref={name}
               type="text"
               placeholder="Full Name"
               className="py-4 my-4 w-full rounded-md bg-gray-600 bg-opacity-50"
@@ -72,8 +141,8 @@ const Login = () => {
           </button>
           <p className=" py-4  cursor-pointer" onClick={handleClick}>
             {isSignForm
-              ? "New to Netflix? Sign up now."
-              : "Already a member? Sign In"}
+              ? "Already a member? Sign In"
+              : "New to Netflix? Sign up now."}
           </p>
         </form>
       </div>

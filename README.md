@@ -25,3 +25,6 @@ configured tailwind insider app.
  --Did firebase setup
  --create authentication 
 
+using google firebase built user login and authentication Feature
+-setup redux store.
+//implemented sign signout using google firebase.
