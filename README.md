@@ -28,3 +28,11 @@ configured tailwind insider app.
 using google firebase built user login and authentication Feature
 -setup redux store.
 //implemented sign signout using google firebase.
+//fixing bug for login and logout.
+//unsubscribed to onAuthchanged callback
+//register for TMDB API and get API token
+//fetch and APi To get movie List
+//Add movie list to reducer
+
+
+
