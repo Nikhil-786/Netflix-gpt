@@ -33,6 +33,13 @@ using google firebase built user login and authentication Feature
 //register for TMDB API and get API token
 //fetch and APi To get movie List
 //Add movie list to reducer
+//Added Movie trailer and and movie trailer to browse list
+//created custom hooks
+//planning for main container and secondary container.
+//update store with movie data
+//fetch data for trailer video video
+//update store with trailer data video
+//Added movies List {popular, upcoming,nowPlaying,Toprated.}
 
 
 
