@@ -1,23 +1,31 @@
-
 import useNowPlaying from "../hooks/useNowPlaying";
 import Header from "./Header";
 import MainContainer from "./MainContainer";
-
+import SecondaryContainer from "./SecondaryContainer";
+import usePopularPlaying from "../hooks/usePopularPlaying";
+import useTopRatedMovies from "../hooks/useTopRatedMovies";
+import useUpComingMovies from "../hooks/useUpComingMovies";
+import GptSearch from "./GptSearch";
+import { useSelector } from "react-redux";
 
 const Browse = () => {
-useNowPlaying();
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
+  useNowPlaying();
+  usePopularPlaying();
+  useTopRatedMovies();
+  useUpComingMovies();
 
   return (
     <div>
       <Header />
-      <MainContainer/>
-      Browse page
-      MainContainer 
-       -video backGround
-       -video title
-       Secondary Container
-        -Movie List * n
-          -Cards *n
+      {showGptSearch ? (
+        <GptSearch />
+      ) : (
+        <>
+          <MainContainer />
+          <SecondaryContainer />
+        </>
+      )}
     </div>
   );
 };

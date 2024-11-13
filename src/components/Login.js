@@ -10,11 +10,12 @@ import { useNavigate } from "react-router-dom";
 import { updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../Utils/userSlice";
+import { IMG_BG_URL } from "../Utils/Constant";
 
 const Login = () => {
   const [isSignForm, setisSignForm] = useState(true);
   const navigate = useNavigate();
-  console.log(isSignForm);
+
   const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
@@ -34,7 +35,7 @@ const Login = () => {
 
     if (isSignForm) {
       //sign Up logic
-      console.log(isSignForm);
+ 
       createUserWithEmailAndPassword(
         auth,
         email.current.value,
@@ -71,7 +72,7 @@ const Login = () => {
         });
     } else {
       //sign In Logic
-      console.log(isSignForm);
+ 
       signInWithEmailAndPassword(
         auth,
         email.current.value,
@@ -97,7 +98,7 @@ const Login = () => {
       <Header />
       <div className="absolute">
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/74d734ca-0eab-4cd9-871f-bca01823d872/web/IN-en-20241021-TRIFECTA-perspective_2277eb50-9da3-4fdf-adbe-74db0e9ee2cf_small.jpg"
+          src={IMG_BG_URL}
           alt="logo"
         />
       </div>
