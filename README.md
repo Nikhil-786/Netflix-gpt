@@ -42,4 +42,11 @@ using google firebase built user login and authentication Feature
 //Added movies List {popular, upcoming,nowPlaying,Toprated.}
 
 
+//Need to build multilingual feature.
+
+//Added GPt search bar 
+..Added GPT search page.
+// Added Toggle page Logic
+// making app responsive
+
 

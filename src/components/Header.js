@@ -53,9 +53,9 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute px-8 py-2 w-full bg-gradient-to-b from-black z-10 flex justify-between bg-black sm:bg-blue-600 md:bg-green-800">
-      <img className=" w-44 " src={LOGO} alt="logo" />
-      <div className="flex p-2">
+    <div className="absolute px-8 py-2 w-full bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between">
+      <img className=" mx-auto w-44 md:mx-0" src={LOGO} alt="logo" />
+      <div className="flex p-2 ">
         <button
           className=" py-2 px-4 mx-4 my-2 bg-purple-800 rounded-xl"
           onClick={handleGptSearchCLick}
