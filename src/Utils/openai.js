@@ -1,9 +1,11 @@
-import OpenAI from "openai";
+
 import { OPENAI_GPT_KEY } from "./Constant";
 
-const openai = new OpenAI({
-  apiKey: OPENAI_GPT_KEY,
-  dangerouslyAllowBrowser: true, // This is the default and can be omitted
-});
 
-export default openai;
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+
+// Access your API key as an environment variable
+const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+
+
+export default genAI
